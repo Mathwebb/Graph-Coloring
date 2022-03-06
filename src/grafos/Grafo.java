@@ -22,7 +22,7 @@ public class Grafo<type> {
 		Aresta<type> aresta1 = new Aresta<type>(inicio, fim);
 		Aresta<type> aresta2 = new Aresta<type>(fim, inicio);
 		inicio.adicionarArestaSaida(aresta1);
-		inicio.adicionarArestaEntrada(aresta1);
+		inicio.adicionarArestaEntrada(aresta2);
 		fim.adicionarArestaEntrada(aresta1);
 		fim.adicionarArestaSaida(aresta2);
 		this.arestas.add(aresta1);
