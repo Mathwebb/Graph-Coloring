@@ -4,13 +4,25 @@ import java.util.ArrayList;
 
 public class Vertice<type> { 
 	private type dado;
-	private ArrayList<Aresta<type>> arestasEntrada;
-	private ArrayList<Aresta<type>> arestasSaida;
+	private Double frequencia;
+	private Boolean visitado;
+	private ArrayList<Aresta<type>> arestas;
 	
 	public Vertice(type valor) {
 		this.dado = valor;
-		this.arestasEntrada = new ArrayList<Aresta<type>>();
-		this.arestasSaida = new ArrayList<Aresta<type>>();
+		this.frequencia = 0.0;
+		this.visitado = false;
+		this.arestas = new ArrayList<Aresta<type>>();
+	}
+	
+	public Vertice(Vertice<type> vertice) {
+		this.dado = vertice.dado;
+		this.frequencia = vertice.frequencia;
+		this.visitado = vertice.visitado;
+		this.arestas = new ArrayList<Aresta<type>>();
+		for (Integer i = 0; i < vertice.arestas.size(); i++) {
+			this.arestas.add(vertice.arestas.get(i));
+		}
 	}
 
 	public type getDado() {
@@ -21,19 +33,27 @@ public class Vertice<type> {
 		this.dado = dado;
 	}
 	
-	public ArrayList<Aresta<type>> getArestasEntrada() {
-		return arestasEntrada;
+	public Double getFrequencia() {
+		return frequencia;
 	}
 
-	public ArrayList<Aresta<type>> getArestasSaida() {
-		return arestasSaida;
+	public void setFrequencia(Double frequencia) {
+		this.frequencia = frequencia;
 	}
 
-	public void adicionarArestaEntrada(Aresta<type> arestaEntrada) {
-		this.arestasEntrada.add(arestaEntrada);
+	public Boolean getVisitado() {
+		return visitado;
 	}
-	
-	public void adicionarArestaSaida(Aresta<type> arestaSaida) {
-		this.arestasSaida.add(arestaSaida);
+
+	public void setVisitado(Boolean visitado) {
+		this.visitado = visitado;
+	}
+
+	public ArrayList<Aresta<type>> getArestas() {
+		return arestas;
+	}
+
+	public void adicionarAresta(Aresta<type> aresta) {
+		this.arestas.add(aresta);
 	}
 }

@@ -8,6 +8,11 @@ public class Aresta<type> {
 		this.inicio = inicio;
 		this.fim = fim;
 	}
+	
+	public Aresta(Aresta<type> aresta) {
+		this.inicio = aresta.inicio;
+		this.fim = aresta.fim;
+	}
 
 	public Vertice<type> getInicio() {
 		return inicio;
