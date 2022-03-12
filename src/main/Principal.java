@@ -1,31 +1,23 @@
 package main;
 
-import coloracao.Colorir;
 import grafos.Grafo;
-import grafos.Vertice;
 
 public class Principal {
 
-	public static void main(String[] args) throws CloneNotSupportedException {
+	public static void main(String[] args) {
 		Grafo<String> grafo = new Grafo<String>();
-		grafo.adicionarVertice("A");
-		grafo.adicionarVertice("B");
-		grafo.adicionarVertice("C");
-		grafo.adicionarAresta("A", "B");
-		grafo.adicionarAresta("C", "A");
-		grafo.adicionarAresta("B", "C");
+		grafo.addVertices("A");
+		grafo.addVertices("B");
+		grafo.addVertices("C");
+		grafo.addArestas("A", "B");
+		grafo.addArestas("A", "C");
+		grafo.addArestas("B", "C");
 		
-		Grafo<String> grafoCopia = (Grafo<String>) grafo.clone();
-		
-		grafoCopia.adicionarVertice("G");
-		System.out.println(grafo.vertices.get(0).getArestas());
-		System.out.println(grafoCopia.vertices.get(0).getArestas());
-
-		
-		Colorir<String> colorindo = new Colorir<String>();
-		Grafo<String> grafoColorido = colorindo.coloreGrafo(grafo);
-		for (Vertice<String> vertice : grafoCopia.getListaVertices()) {
-			System.out.println("Vertice: " + vertice.getDado() + "  Freq: " + vertice.getFrequencia());
+		for (Integer i = 0; i < grafo.getVertices().size(); i++) {
+			System.out.println("Vertice: " + grafo.getVertices().get(i).getDado());
+		}
+		for (Integer i = 0; i < grafo.getArestas().size(); i = i + 2) {
+			System.out.println("Aresta: " + grafo.getArestas().get(i).getDado() + "," + grafo.getArestas().get(i+1).getDado());
 		}
 	}
 

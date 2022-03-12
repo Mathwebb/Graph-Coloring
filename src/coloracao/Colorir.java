@@ -8,7 +8,6 @@ import grafos.Vertice;
 public class Colorir <type> {
 	private Integer minCores;
 	private Grafo<type> melhorColoracao;
-	private Integer vezes = 0;
 	ArrayList<Double> freqs = new ArrayList<Double>();
 	
 	public Grafo<type> coloreGrafo(Grafo<type> grafo) {
@@ -52,8 +51,6 @@ public class Colorir <type> {
 					minCores = quantCores;
 					melhorColoracao = grafo;
 				}
-				vezes++;
-				System.out.println("Passei: " + vezes);
 				return;
 			}
 		}

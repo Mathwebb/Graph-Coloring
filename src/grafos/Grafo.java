@@ -2,86 +2,73 @@ package grafos;
 
 import java.util.ArrayList;
 
-public class Grafo<type> implements Cloneable {
-	public ArrayList<Vertice<type>> vertices;
-	public ArrayList<Aresta<type>> arestas;
+public class Grafo<type>{
+	private ArrayList<ArrayList<Vertice<type>>> grafo;
 	
 	public Grafo() {
-		this.vertices = new ArrayList<Vertice<type>>();
-		this.arestas = new ArrayList<Aresta<type>>();
+		grafo = new ArrayList<ArrayList<Vertice<type>>>();
 	}
 	
-	public Grafo(ArrayList<Vertice<type>> vertices, ArrayList<Aresta<type>> arestas) {
-		this.vertices = vertices;
-		this.arestas = arestas;
+	public Grafo(Grafo<type> grafo) {
+		ArrayList<ArrayList<Vertice<type>>> elementosGrafo = grafo.getElementosGrafo();
+		this.grafo = new ArrayList<ArrayList<Vertice<type>>>();
+		for (Integer i = 0; i < elementosGrafo.size(); i++) {
+			ArrayList<Vertice<type>> novoArrayVertices = new ArrayList<Vertice<type>>();
+			for (Integer j = 0; j < elementosGrafo.get(i).size(); j++) {
+				Vertice<type> antigoVertice = elementosGrafo.get(i).get(j);
+				Vertice<type> novoVertice = new Vertice<type>(antigoVertice.getDado());
+				novoArrayVertices.add(novoVertice);
+			}
+		this.grafo.add(novoArrayVertices);
+		}
 	}
 	
-//	// Contrutor para permitir a clonagem de um grafo
-//	public Grafo(Grafo<type> grafo) {
-//		this.vertices = new ArrayList<Vertice<type>>();
-//		for (Integer i = 0; i < grafo.vertices.size(); i++) {
-//			Vertice<type> vertice = new Vertice<type>(grafo.getListaVertices().get(i));
-//			this.vertices.add(i, vertice);
-//		}
-//		this.arestas = new ArrayList<Aresta<type>>();
-//		for (Integer i = 0; i < grafo.arestas.size(); i++) {
-//			Aresta<type> aresta = new Aresta<type>(grafo.arestas.get(i).getInicio(),grafo.arestas.get(i).getFim());
-//			this.arestas.add(i, aresta);
-//		}
-//	}
-	
-	public Object clone() {
-        // deep copy
-        ArrayList<Vertice<type>> verticesCopia = new ArrayList<Vertice<type>>();
-        ArrayList<Aresta<type>> arestasCopia = new ArrayList<Aresta<type>>();
-        for(int i = 0 ; i < vertices.size() ; i++) {
-            Vertice<type> novoVertice = (Vertice<type>) vertices.get(i).clone();
-            verticesCopia.add(novoVertice);
-        }
-        for(int i = 0 ; i < arestas.size() ; i++) {
-            Aresta<type> aresta = new Aresta<type>(arestas.get(i).getInicio(),arestas.get(i).getFim());
-            arestasCopia.add(aresta);
-        }
-        Grafo<type> copia = new Grafo<type>(verticesCopia, arestasCopia);
-        return copia;
-    }
-	
-	public void adicionarVertice(type dado) {
-		Vertice<type> novoVertice = new Vertice<type>(dado);
-		vertices.add(novoVertice);
+	public ArrayList<ArrayList<Vertice<type>>> getElementosGrafo() {
+		return grafo;
 	}
 	
-	public void adicionarAresta(type dadoVert_1, type dadoVert_2) {
-		Vertice<type> inicio = this.getVertice(dadoVert_1);
-		Vertice<type> fim = this.getVertice(dadoVert_2);
-		Aresta<type> arestaInicio = new Aresta<type>(inicio, fim);
-		Aresta<type> arestaFim = new Aresta<type>(fim, inicio);
-		inicio.adicionarAresta(arestaInicio);
-		fim.adicionarAresta(arestaFim);
-		this.arestas.add(arestaInicio);
-		this.arestas.add(arestaFim);
+	public ArrayList<Vertice<type>> getVertices() {
+		ArrayList<Vertice<type>> vertices = new ArrayList<Vertice<type>>();
+		for (Integer i = 0; i < grafo.size(); i++) {
+			vertices.add(grafo.get(i).get(0));
+		}
+		return vertices;
 	}
 	
-	public Vertice<type> getVertice(type dado) {
-		Vertice<type> vertice = null;
-		for (int i = 0; i < this.vertices.size(); i++) {
-			if (dado.equals(vertices.get(i).getDado())) {
-				vertice = vertices.get(i);
+	public void addVertices(type dadoVert) {
+		Vertice<type> vertice = new Vertice<type>(dadoVert);
+		ArrayList<Vertice<type>> listaVertice = new ArrayList<Vertice<type>>();
+		listaVertice.add(vertice);
+		grafo.add(listaVertice);
+	}
+	
+	public ArrayList<Vertice<type>> getArestas(){
+		ArrayList<Vertice<type>> arestas = new ArrayList<Vertice<type>>();
+		Vertice<type> verticeInicial;
+		for (Integer i = 0; i < grafo.size(); i++) {
+			verticeInicial = grafo.get(i).get(0);
+			for (Integer j = 1; j < grafo.get(i).size(); j++) {
+				arestas.add(verticeInicial);
+				arestas.add(grafo.get(i).get(j));
+			}
+		}
+		return arestas;
+	}
+	
+	public void addArestas(type dadoVertInicio, type dadoVertFim) {
+		Vertice<type> verticeInicio = new Vertice<type>(dadoVertInicio);
+		Vertice<type> verticeFim = new Vertice<type>(dadoVertFim);
+		for (Integer i = 0; i < grafo.size(); i++) {
+			if (grafo.get(i).get(0).getDado().equals(verticeInicio.getDado())) {
+				grafo.get(i).add(verticeFim);
 				break;
 			}
 		}
-		if (vertice != null) {
-			return vertice;
-		}else {
-			return null;
+		for (Integer i = 0; i < grafo.size(); i++) {
+			if (grafo.get(i).get(0).getDado().equals(verticeFim.getDado())) {
+				grafo.get(i).add(verticeInicio);
+				break;
+			}
 		}
-	}
-	
-	public Integer size() {
-		return vertices.size();
-	}
-	
-	public ArrayList<Vertice<type>> getListaVertices(){
-		return vertices;
 	}
 }
