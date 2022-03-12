@@ -15,14 +15,34 @@ public class Vertice<type> {
 		this.arestas = new ArrayList<Aresta<type>>();
 	}
 	
-	public Vertice(Vertice<type> vertice) {
-		this.dado = vertice.dado;
-		this.frequencia = vertice.frequencia;
-		this.visitado = vertice.visitado;
+	public Vertice() {
+		this.dado = null;
+		this.frequencia = 0.0;
+		this.visitado = false;
 		this.arestas = new ArrayList<Aresta<type>>();
-		for (Integer i = 0; i < vertice.arestas.size(); i++) {
-			this.arestas.add(vertice.arestas.get(i));
+	}
+	
+//	public Vertice(Vertice<type> vertice) {
+//		this.dado = vertice.dado;
+//		this.frequencia = vertice.frequencia;
+//		this.visitado = vertice.visitado;
+//		this.arestas = new ArrayList<Aresta<type>>();
+//		for (Integer i = 0; i < vertice.arestas.size(); i++) {
+//			this.arestas.add(i, vertice.arestas.get(i));
+//		}
+//	}
+	
+	public Object clone() {
+		Vertice<type> verticeCopia = new Vertice<type>();
+		ArrayList<Aresta<type>> arestasCopia = new ArrayList<Aresta<type>>();
+		verticeCopia.setDado(dado);
+		verticeCopia.setFrequencia(frequencia);
+		verticeCopia.setVisitado(visitado);
+		verticeCopia.arestas = arestasCopia;
+		for (Integer i = 0; i < arestas.size(); i++) {
+			arestasCopia.add(i, arestas.get(i));
 		}
+		return verticeCopia;
 	}
 
 	public type getDado() {

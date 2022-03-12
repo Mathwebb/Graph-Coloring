@@ -11,7 +11,7 @@ public class Colorir <type> {
 	private Integer vezes = 0;
 	ArrayList<Double> freqs = new ArrayList<Double>();
 	
-	public Grafo<type> coloreGrafo(Grafo<type> grafo) throws CloneNotSupportedException {
+	public Grafo<type> coloreGrafo(Grafo<type> grafo) {
 		for (Double i = 0.0, t = 90.0; i < grafo.size(); i++) {
 			freqs.add(t);
 			t++;
@@ -26,7 +26,7 @@ public class Colorir <type> {
 		return melhorColoracao;
 	}
 	
-	private void percorreGrafo(Grafo<type> grafo, Vertice<type> vertice, Integer quantCores) throws CloneNotSupportedException {
+	private void percorreGrafo(Grafo<type> grafo, Vertice<type> vertice, Integer quantCores) {
 		Integer quantVizinhos = vertice.getArestas().size();
 		Grafo<type> grafoCopia = grafo;
 		// Verifica se o vertice ja foi visitado para adicionar uma cor

@@ -15,16 +15,16 @@ public class Principal {
 		grafo.adicionarAresta("C", "A");
 		grafo.adicionarAresta("B", "C");
 		
-		Grafo<String> grafoCopia = new Grafo<String>(grafo);
+		Grafo<String> grafoCopia = (Grafo<String>) grafo.clone();
 		
 		grafoCopia.adicionarVertice("G");
-		System.out.println(grafo.getListaVertices().get(0).getArestas());
-		System.out.println(grafoCopia.getListaVertices().get(0).getArestas());
+		System.out.println(grafo.vertices.get(0).getArestas());
+		System.out.println(grafoCopia.vertices.get(0).getArestas());
 
 		
 		Colorir<String> colorindo = new Colorir<String>();
 		Grafo<String> grafoColorido = colorindo.coloreGrafo(grafo);
-		for (Vertice<String> vertice : grafoColorido.getListaVertices()) {
+		for (Vertice<String> vertice : grafoCopia.getListaVertices()) {
 			System.out.println("Vertice: " + vertice.getDado() + "  Freq: " + vertice.getFrequencia());
 		}
 	}
