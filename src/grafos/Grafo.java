@@ -27,6 +27,10 @@ public class Grafo<type>{
 		return grafo;
 	}
 	
+	public Integer size() {
+		return grafo.size();
+	}
+	
 	public ArrayList<Vertice<type>> getVertices() {
 		ArrayList<Vertice<type>> vertices = new ArrayList<Vertice<type>>();
 		for (Integer i = 0; i < grafo.size(); i++) {
@@ -35,8 +39,23 @@ public class Grafo<type>{
 		return vertices;
 	}
 	
+	public Integer getVertice(type dado) {
+		for (Integer i = 0; i < grafo.size(); i++) {
+			if (grafo.get(i).get(0).getDado().equals(dado)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 	public void addVertices(type dadoVert) {
-		Vertice<type> vertice = new Vertice<type>(dadoVert);
+		Vertice<type> vertice;
+		Integer indexVert = getVertice(dadoVert);
+		if (indexVert == -1) {
+			vertice = new Vertice<type>(dadoVert);
+		} else {
+			vertice = grafo.get(indexVert).get(0);
+		}
 		ArrayList<Vertice<type>> listaVertice = new ArrayList<Vertice<type>>();
 		listaVertice.add(vertice);
 		grafo.add(listaVertice);

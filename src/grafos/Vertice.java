@@ -3,18 +3,18 @@ package grafos;
 public class Vertice<type> { 
 	private type dado;
 	private Double frequencia;
-	private Boolean visitado;
+	private Integer visitado;
 	
 	public Vertice(type valor) {
 		this.dado = valor;
 		this.frequencia = 0.0;
-		this.visitado = false;
+		this.visitado = 0;
 	}
 	
 	public Vertice() {
 		this.dado = null;
 		this.frequencia = 0.0;
-		this.visitado = false;
+		this.visitado = 0;
 	}
 
 	public type getDado() {
@@ -33,11 +33,11 @@ public class Vertice<type> {
 		this.frequencia = frequencia;
 	}
 
-	public Boolean getVisitado() {
+	public Integer getVisitado() {
 		return visitado;
 	}
 
-	public void setVisitado(Boolean visitado) {
+	public void setVisitado(Integer visitado) {
 		this.visitado = visitado;
 	}
 }
