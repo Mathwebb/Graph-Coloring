@@ -10,15 +10,19 @@ public class Principal {
 		grafo.addVertices("A");
 		grafo.addVertices("B");
 		grafo.addVertices("C");
-		grafo.addArestas("A", "B");
-		grafo.addArestas("A", "C");
-		grafo.addArestas("B", "C");
+		grafo.addVertices("D");
+		grafo.addVertices("E");
+		grafo.addAresta("A", "B");
+		grafo.addAresta("A", "C");
+		grafo.addAresta("B", "C");
+		grafo.addAresta("E", "C");
+		grafo.addAresta("E", "D");
 		
 //		for (Integer i = 0; i < grafo.getVertices().size(); i++) {
-//			System.out.println("Vertice: " + grafo.getVertices().get(i).getDado());
+//			System.out.println("Vertice: " + grafo.getVertices().get(i));
 //		}
 //		for (Integer i = 0; i < grafo.getArestas().size(); i = i + 2) {
-//			System.out.println("Aresta: " + grafo.getArestas().get(i).getDado() + "," + grafo.getArestas().get(i+1).getDado());
+//			System.out.println("Aresta: " + grafo.getArestas().get(i) + "," + grafo.getArestas().get(i+1));
 //		}
 		
 		Colorir<String> colorindo = new Colorir<String>();
@@ -27,9 +31,6 @@ public class Principal {
             System.out.print("Vertice: " + grafoRes.getVertices().get(i).getDado());
             System.out.println(" - Frequência: " + grafoRes.getVertices().get(i).getFrequencia());
         }
-		for (Integer i = 0; i < grafoRes.size(); i++) {
-			System.out.println(grafoRes.getElementosGrafo().get(i));
-		}
 	}
 
 }

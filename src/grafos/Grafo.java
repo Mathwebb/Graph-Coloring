@@ -14,12 +14,17 @@ public class Grafo<type>{
 		this.grafo = new ArrayList<ArrayList<Vertice<type>>>();
 		for (Integer i = 0; i < elementosGrafo.size(); i++) {
 			ArrayList<Vertice<type>> novoArrayVertices = new ArrayList<Vertice<type>>();
-			for (Integer j = 0; j < elementosGrafo.get(i).size(); j++) {
-				Vertice<type> antigoVertice = elementosGrafo.get(i).get(j);
-				Vertice<type> novoVertice = new Vertice<type>(antigoVertice.getDado());
-				novoArrayVertices.add(novoVertice);
+			Vertice<type> antigoVertice = elementosGrafo.get(i).get(0);
+			Vertice<type> novoVertice = new Vertice<type>(antigoVertice.getDado(), antigoVertice.getFrequencia(), antigoVertice.getVisitado());
+			novoArrayVertices.add(novoVertice);
+			this.grafo.add(novoArrayVertices);
+		}
+		for (Integer i = 0; i < grafo.size(); i++) {
+			for (Integer j = 1; j < grafo.getElementosGrafo().get(i).size(); j++) {
+				Vertice<type> antigoVizinho = grafo.getElementosGrafo().get(i).get(j);
+				Vertice<type> novoVizinho = this.getVerticeV(antigoVizinho.getDado());
+				this.grafo.get(i).add(novoVizinho);
 			}
-		this.grafo.add(novoArrayVertices);
 		}
 	}
 	
@@ -48,6 +53,15 @@ public class Grafo<type>{
 		return -1;
 	}
 	
+	public Vertice<type> getVerticeV(type dado) {
+		for (Integer i = 0; i < grafo.size(); i++) {
+			if (grafo.get(i).get(0).getDado().equals(dado)) {
+				return grafo.get(i).get(0);
+			}
+		}
+		return null;
+	}
+	
 	public void addVertices(type dadoVert) {
 		Vertice<type> vertice;
 		Integer indexVert = getVertice(dadoVert);
@@ -74,18 +88,46 @@ public class Grafo<type>{
 		return arestas;
 	}
 	
-	public void addArestas(type dadoVertInicio, type dadoVertFim) {
+	public Boolean buscaAresta(Grafo<type> grafo, Vertice<type> VertInicio, Vertice<type> dadoVertFim) {
+		for (Integer i = 0; i < grafo.size(); i++) {
+			if (grafo.getElementosGrafo().get(i).get(0).getDado().equals(dadoVertFim)) {
+				for (Integer j = 1; j < grafo.getElementosGrafo().get(i).size(); j++) {
+					if (grafo.getElementosGrafo().get(i).get(j).getDado().equals(dadoVertFim)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void addAresta(type dadoVertInicio, type dadoVertFim) {
 		Vertice<type> verticeInicio = new Vertice<type>(dadoVertInicio);
 		Vertice<type> verticeFim = new Vertice<type>(dadoVertFim);
 		for (Integer i = 0; i < grafo.size(); i++) {
 			if (grafo.get(i).get(0).getDado().equals(verticeInicio.getDado())) {
-				grafo.get(i).add(verticeFim);
+				grafo.get(i).add(grafo.get(getVertice(dadoVertFim)).get(0));
 				break;
 			}
 		}
 		for (Integer i = 0; i < grafo.size(); i++) {
 			if (grafo.get(i).get(0).getDado().equals(verticeFim.getDado())) {
-				grafo.get(i).add(verticeInicio);
+				grafo.get(i).add(grafo.get(getVertice(dadoVertInicio)).get(0));
+				break;
+			}
+		}
+	}
+	
+	public void addAresta(Vertice<type> VertInicio, Vertice<type> VertFim) {
+		for (Integer i = 0; i < grafo.size(); i++) {
+			if (grafo.get(i).get(0).getDado().equals(VertInicio.getDado())) {
+				grafo.get(i).add(grafo.get(getVertice(VertFim.getDado())).get(0));
+				break;
+			}
+		}
+		for (Integer i = 0; i < grafo.size(); i++) {
+			if (grafo.get(i).get(0).getDado().equals(VertFim.getDado())) {
+				grafo.get(i).add(grafo.get(getVertice(VertInicio.getDado())).get(0));
 				break;
 			}
 		}

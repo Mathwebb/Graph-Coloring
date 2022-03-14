@@ -11,6 +11,12 @@ public class Vertice<type> {
 		this.visitado = 0;
 	}
 	
+	public Vertice(type valor, Double frequencia, Integer visitado) {
+		this.dado = valor;
+		this.frequencia = frequencia;
+		this.visitado = visitado;
+	}
+	
 	public Vertice() {
 		this.dado = null;
 		this.frequencia = 0.0;
