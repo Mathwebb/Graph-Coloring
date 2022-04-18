@@ -48,6 +48,7 @@ public class Colorir <type> {
 		Vertice<type> vertice = grafo.getElementosGrafo().get(indexVert).get(0);
 		ArrayList<Vertice<type>> vizinhos = grafo.getElementosGrafo().get(indexVert);
 		Integer indexCorAtual = 0;
+		ArrayList<Double> coresVizinhos = new ArrayList<>();
 		System.out.println(iteracao++);
 		
 		//Verifica se o vertice ja foi visitado e se não foi adiciona uma cor a esse vértice, bem como marca que ele já foi visitado uma vez
@@ -55,14 +56,6 @@ public class Colorir <type> {
 		if (vertice.getVisitado() == 0) {
 			vertice.setVisitado(1);
 			//Garante que o vértice atual não vai receber a mesmo cor que os seus vizinhos
-			for (Integer i = 0; i < vizinhos.size(); i++) {
-				if (vizinhos.get(i).getFrequencia() == freqs.get(indexCorAtual)) {
-					i = 0;
-					indexCorAtual++;
-				}
-			}
-			vertice.setFrequencia(freqs.get(indexCorAtual));
-			quantCores++;
 		} else {
 			vertice.setVisitado(vertice.getVisitado()+1);
 		}
