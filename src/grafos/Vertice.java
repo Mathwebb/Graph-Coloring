@@ -1,16 +1,26 @@
 package grafos;
 
-import java.util.ArrayList;
-
 public class Vertice<type> { 
 	private type dado;
-	private ArrayList<Aresta<type>> arestasEntrada;
-	private ArrayList<Aresta<type>> arestasSaida;
+	private Double frequencia;
+	private Integer visitado;
 	
 	public Vertice(type valor) {
 		this.dado = valor;
-		this.arestasEntrada = new ArrayList<Aresta<type>>();
-		this.arestasSaida = new ArrayList<Aresta<type>>();
+		this.frequencia = 0.0;
+		this.visitado = 0;
+	}
+	
+	public Vertice(type valor, Double frequencia, Integer visitado) {
+		this.dado = valor;
+		this.frequencia = frequencia;
+		this.visitado = visitado;
+	}
+	
+	public Vertice() {
+		this.dado = null;
+		this.frequencia = 0.0;
+		this.visitado = 0;
 	}
 
 	public type getDado() {
@@ -21,19 +31,19 @@ public class Vertice<type> {
 		this.dado = dado;
 	}
 	
-	public ArrayList<Aresta<type>> getArestasEntrada() {
-		return arestasEntrada;
+	public Double getFrequencia() {
+		return frequencia;
 	}
 
-	public ArrayList<Aresta<type>> getArestasSaida() {
-		return arestasSaida;
+	public void setFrequencia(Double frequencia) {
+		this.frequencia = frequencia;
 	}
 
-	public void adicionarArestaEntrada(Aresta<type> arestaEntrada) {
-		this.arestasEntrada.add(arestaEntrada);
+	public Integer getVisitado() {
+		return visitado;
 	}
-	
-	public void adicionarArestaSaida(Aresta<type> arestaSaida) {
-		this.arestasSaida.add(arestaSaida);
+
+	public void setVisitado(Integer visitado) {
+		this.visitado = visitado;
 	}
 }
