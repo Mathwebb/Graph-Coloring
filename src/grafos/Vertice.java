@@ -1,26 +1,31 @@
 package grafos;
 
-public class Vertice<type> { 
+
+public class Vertice<type> implements Comparable<Vertice<type>>{ 
 	private type dado;
 	private Double frequencia;
 	private Integer visitado;
+	private Integer grau;
 	
 	public Vertice(type valor) {
 		this.dado = valor;
 		this.frequencia = 0.0;
 		this.visitado = 0;
+		this.grau = 0;
 	}
 	
-	public Vertice(type valor, Double frequencia, Integer visitado) {
+	public Vertice(type valor, Double frequencia, Integer visitado, Integer grau) {
 		this.dado = valor;
 		this.frequencia = frequencia;
 		this.visitado = visitado;
+		this.grau = grau;
 	}
 	
 	public Vertice() {
 		this.dado = null;
 		this.frequencia = 0.0;
 		this.visitado = 0;
+		this.grau = 0;
 	}
 
 	public type getDado() {
@@ -45,5 +50,24 @@ public class Vertice<type> {
 
 	public void setVisitado(Integer visitado) {
 		this.visitado = visitado;
+	}
+
+	public Integer getGrau() {
+		return grau;
+	}
+
+	public void setGrau(Integer grau) {
+		this.grau = grau;
+	}
+
+	public int compareTo(Vertice<type> outroVertice) {
+		if (this.grau > outroVertice.getGrau()) {
+			return -1;
+		}
+		
+		if (this.grau < outroVertice.getGrau()) {
+			return 1;
+		}
+		return 0;
 	}
 }

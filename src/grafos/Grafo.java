@@ -21,7 +21,7 @@ public class Grafo<type>{
 		for (Integer i = 0; i < elementosGrafo.size(); i++) {
 			ArrayList<Vertice<type>> novoArrayVertices = new ArrayList<Vertice<type>>();
 			Vertice<type> antigoVertice = elementosGrafo.get(i).get(0);
-			Vertice<type> novoVertice = new Vertice<type>(antigoVertice.getDado(), antigoVertice.getFrequencia(), antigoVertice.getVisitado());
+			Vertice<type> novoVertice = new Vertice<type>(antigoVertice.getDado(), antigoVertice.getFrequencia(), antigoVertice.getVisitado(), antigoVertice.getGrau());
 			novoArrayVertices.add(novoVertice);
 			this.grafo.add(novoArrayVertices);
 		}
@@ -37,6 +37,10 @@ public class Grafo<type>{
 	//Função que retorna um ArrayList de ArrayList de vertices que seria o grafo
 	public ArrayList<ArrayList<Vertice<type>>> getElementosGrafo() {
 		return grafo;
+	}
+	
+	public ArrayList<Vertice<type>> get(Integer index) {
+		return grafo.get(index);
 	}
 	
 	//Função que retorna o tamanho do grafo
@@ -138,12 +142,14 @@ public class Grafo<type>{
 		for (Integer i = 0; i < grafo.size(); i++) {
 			if (grafo.get(i).get(0).getDado().equals(verticeInicio.getDado())) {
 				grafo.get(i).add(grafo.get(getVertice(dadoVertFim)).get(0));
+				grafo.get(i).get(0).setGrau(grafo.get(i).get(0).getGrau()+1);
 				break;
 			}
 		}
 		for (Integer i = 0; i < grafo.size(); i++) {
 			if (grafo.get(i).get(0).getDado().equals(verticeFim.getDado())) {
 				grafo.get(i).add(grafo.get(getVertice(dadoVertInicio)).get(0));
+				grafo.get(i).get(0).setGrau(grafo.get(i).get(0).getGrau()+1);
 				break;
 			}
 		}

@@ -2,33 +2,44 @@ package main;
 
 import grafos.Grafo;
 import coloracao.Baseline;
+import coloracao.Heuristica;
 
 public class Principal {
 	public static void main(String[] args) {
-		Grafo<String> resultado;
+		Grafo<String> resultadoBaseline;
+		Grafo<String> resultadoHeuristica;
 		Baseline<String> baseline = new Baseline<String>();
+		Heuristica<String> heuristica = new Heuristica<String>();
 		Grafo<String> grafo = new Grafo<String>();
-		
 
 		grafo.addVertices("A");
 		grafo.addVertices("B");
 		grafo.addVertices("C");
 		grafo.addVertices("D");
 		grafo.addVertices("E");
-		grafo.addVertices("F");
-		grafo.addVertices("G");
-
+		
 		grafo.addAresta("A", "B");
 		grafo.addAresta("A", "C");
-		grafo.addAresta("C", "D");
+		grafo.addAresta("A", "D");
+		grafo.addAresta("A", "E");
+		grafo.addAresta("B", "E");
 		grafo.addAresta("C", "E");
-		grafo.addAresta("A", "F");
-		grafo.addAresta("B", "G");
+		grafo.addAresta("C", "D");
 		
-		resultado = baseline.algoritmoExato(grafo);
+		Grafo<String> grafoHeur = new Grafo<String>(grafo);
 		
-		for (Integer i = 0; i < resultado.size(); i++) {
-			System.out.println(resultado.getElementosGrafo().get(i).get(0).getFrequencia());
+		resultadoHeuristica = heuristica.welshPowel(grafoHeur);
+		
+		resultadoBaseline = baseline.algoritmoExato(grafo);
+		
+		for (Integer i = 0; i < resultadoBaseline.size(); i++) {
+			System.out.println(resultadoBaseline.get(i).get(0).getFrequencia());
+		}
+		
+		System.out.println();
+		
+		for (Integer i = 0; i < resultadoHeuristica.size(); i++) {
+			System.out.println(resultadoHeuristica.get(i).get(0).getFrequencia());
 		}
 	}
 }
