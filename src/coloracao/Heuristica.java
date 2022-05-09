@@ -6,10 +6,12 @@ import grafos.Grafo;
 import grafos.Vertice;
 
 public class Heuristica<type> {
+	
 	public Grafo<type> welshPowel(Grafo<type> grafo) {
 		ArrayList<Vertice<type>> vertices = grafo.getVertices();
 		Collections.sort(vertices);
 		ArrayList<Double> cores = calculaCores(grafo, 89.0, 1.0);
+		Boolean colorido = true;
 		
 		for (Integer i = 0; i < cores.size(); i++) {
 			for (Integer t = 0; t < vertices.size(); t++) {
@@ -17,8 +19,13 @@ public class Heuristica<type> {
 				if (verticeAtual.getFrequencia() == 0.0 && coloracaoValida(grafo.get(grafo.getVertice(verticeAtual.getDado())), cores.get(i))) {
 					vertices.get(t).setFrequencia(cores.get(i));
 					verticeAtual.setFrequencia(cores.get(i));
+					colorido = false;
 				}
 			}
+			if (colorido) {
+				break;
+			}
+			colorido = true;
 		}
 		
 		return grafo;

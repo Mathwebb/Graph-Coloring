@@ -54,7 +54,7 @@ public class Baseline<type> {
 			resultado = coloreGrafo(new Grafo<type>(grafo), possibilidades.get(i), numCores);
 			if (resultado != null) {
 				melhorColoracao = resultado;
-				numCores = validaSolucaoOtima(melhorColoracao, numCores);
+				numCores = validaSolucaoOtima(melhorColoracao);
 			}
 		}
 		return melhorColoracao;
@@ -65,8 +65,8 @@ public class Baseline<type> {
 			grafo.get(i).get(0).setFrequencia(possibilidade.get(i));
 		}
 		Boolean coloracaoValida = validaColoracao(grafo);
-		Integer novoNumCores = validaSolucaoOtima(grafo, numCores);
-		if (coloracaoValida && novoNumCores < numCores) {
+		Integer novoNumCores = validaSolucaoOtima(grafo);
+		if (coloracaoValida && novoNumCores <= numCores) {
 			return grafo;
 		}
 		return null;
@@ -84,7 +84,7 @@ public class Baseline<type> {
 		return true;
 	}
 	
-	private Integer validaSolucaoOtima(Grafo<type> grafo, Integer numCores) {
+	public Integer validaSolucaoOtima(Grafo<type> grafo) {
 		ArrayList<Double> coresUsadas = new ArrayList<Double>();
 		for (Integer i = 0; i < grafo.size(); i++) {
 			if (coresUsadas.size() == 0) {

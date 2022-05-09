@@ -1,6 +1,7 @@
 package grafos;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Grafo<type>{
 	private ArrayList<ArrayList<Vertice<type>>> grafo;
@@ -171,6 +172,41 @@ public class Grafo<type>{
 				grafo.get(i).add(grafo.get(getVertice(VertInicio.getDado())).get(0));
 				break;
 			}
+		}
+	}
+	
+	public void constroiGrafoAleatorio(ArrayList<type> vertices, Integer arestas) {
+		grafo = new ArrayList<ArrayList<Vertice<type>>>();
+		Random gerador = new Random();
+		Boolean flag = true;
+		for (Integer i = 0; i < vertices.size(); i++) {
+			addVertices(vertices.get(i));
+		}
+		int maxAresta = 0;
+		for (int i = 1; i < vertices.size(); i++) {
+			maxAresta += i;
+		}
+		if (arestas > maxAresta) {
+			arestas--;
+		}
+		for (Integer i = 0; i < arestas; i++) {
+			Integer vertInicio = gerador.nextInt(vertices.size());
+			Integer vertFim = gerador.nextInt(vertices.size());
+			if (vertInicio == vertFim) {
+				i--;
+				continue;
+			}
+			for (Integer t = 1; t < grafo.get(vertInicio).size(); t++) {
+				if (grafo.get(vertInicio).get(t).getDado() == vertices.get(vertFim)) {
+					i--;
+					flag = false;
+					break;
+				}
+			}
+			if (flag) {
+				addAresta(vertices.get(vertInicio), vertices.get(vertFim));
+			}
+			flag = true;
 		}
 	}
 }
